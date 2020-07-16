@@ -87,12 +87,32 @@ DROP COLUMN cargo;
 
 
 
--- simples exemplos, populando tabelas
+-- -------- simples exemplos, populando tabelas
 
+-- usando nomes dos atributos
+INSERT INTO AMBULATORIOS (nroa, andar, capacidade) VALUES (1,1,30);
 
+-- sem a utilização dos nomes dos atributos
+INSERT INTO AMBULATORIOS VALUES (2,1,50);
 
+INSERT INTO AMBULATORIOS (nroa, andar, capacidade) VALUES (3,2,40);
+INSERT INTO AMBULATORIOS VALUES (4,2,25);
+INSERT INTO AMBULATORIOS VALUES (5,2,55);
 
+INSERT INTO MEDICOS (codm, nome, idade, especialidade, cpf, cidade, nroa) VALUES
+(1,'João', 40, 'ortopedia',10000100000, 'florianopolis', 1);
+INSERT INTO MEDICOS VALUES 
+(2, 'Maria', 42, 'traumatologista', 10000110000, 'Blumenau', 2);
 
+-- ATUALIZANDO UM REGISTRO
+UPDATE MEDICOS SET cidade = 'Florianopolis' WHERE codm = 1;
+
+INSERT INTO MEDICOS VALUES (3, 'Pedro', 51, 'pediatria', 11000100000, 'São José', 2);
+
+-- deixando de passar um valor
+INSERT INTO MEDICOS (codm, nome, idade, especialidade, cpf, cidade) VALUES (4, 'Carlos', 28, 'ortopedia', 11000110000, 'Joinvile');
+
+INSERT INTO MEDICOS VALUES (5, 'Marcia', 33, 'neurologico', 11000111000, 'Biguacu', 3);
 
 
 -- ALGUNS COMENTÁRIOS GERAIS
