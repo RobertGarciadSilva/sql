@@ -1,9 +1,10 @@
 
--- simple dataset saleman_id
+-- simple dataset
+-- Content: Tables -> SALESMAN, ORDERS, CUSTOMER, NOBEL_WIN, ITEM_MAST, EMP_DETAILS
 
-DROP DATABASE IF EXISTS sql_simpleData_SALESMAN;
-CREATE DATABASE sql_simpleData_SALESMAN;
-USE sql_simpleData_SALESMAN;
+DROP DATABASE IF EXISTS sql_simpleData01;
+CREATE DATABASE sql_simpleData01;
+USE sql_simpleData01;
 
 CREATE TABLE SALESMAN (
 salesman_id INT PRIMARY KEY,
@@ -101,7 +102,7 @@ VALUES
 
 INSERT INTO ORDERS
 VALUES
-(70011, 75.29, '2012-06-27', 3008, 5002);
+(70011, 75.29, '2012-08-17', 3003, 5007);
 
 INSERT INTO ORDERS
 VALUES
@@ -269,64 +270,117 @@ VALUES
 
 
 
+-- CREATE OTHER TABLE
 
--- ---- SIMPLE QUERYS/ EXERCICES
+CREATE TABLE ITEM_MAST (
+pro_id INT PRIMARY KEY,
+pro_name VARCHAR (50), 
+pro_price FLOAT,
+pro_com INT
+);
 
--- 1. Write a SQL statement to display all the information of all salesmen.
--- SELECT * FROM SALESMAN;
+INSERT INTO ITEM_MAST
+VALUES
+(101, 'Mother Board', 3200, 15);
 
--- 2. Write a SQL statement to display a string "This is SQL Exercise, Practice and Solution".
--- SELECT "This is SQL EXERCICE, Practice and Solution";
+INSERT INTO ITEM_MAST
+VALUES
+(102, 'Key Board', 450, 16);
 
--- 3. Write a query to display three numbers in three columns.
--- SELECT 5,10,15;
+INSERT INTO ITEM_MAST
+VALUES
+(103, 'ZIP drive', 250, 14);
 
--- 4. Write a query to display sum of two numbers 10 and 15.
--- SELECT 5 + 10;
+INSERT INTO ITEM_MAST
+VALUES
+(104, 'Speaker', 550, 16);
 
--- 5. Write a query to display the result of an arithmetic expression.
--- SELECT 5*2 + 4 - 2 + 10/2;
+INSERT INTO ITEM_MAST
+VALUES
+(105, 'Monitor', 5000, 11);
 
--- 6. Write a SQL statement to display specific columns like name and commission for all the salesmen.
--- SELECT name, commission FROM SALESMAN;
+INSERT INTO ITEM_MAST
+VALUES
+(106, 'DVD drive', 900, 12);
+
+INSERT INTO ITEM_MAST
+VALUES
+(107, 'CD drive', 800, 12);
+
+INSERT INTO ITEM_MAST
+VALUES
+(108, 'Printer', 2600, 13);
+
+INSERT INTO ITEM_MAST
+VALUES
+(109, 'Refill Cartindge', 350, 13);
+
+INSERT INTO ITEM_MAST
+VALUES
+(110, 'Mouse', 250, 12);
+
+-- CREATE OTHER TABLE
+
+CREATE TABLE EMP_DETAILS (
+emp_idno INT PRIMARY KEY,
+emp_fname VARCHAR (30),
+emp_lname VARCHAR (30),
+emp_dept INT
+);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(127323, 'Michale', 'Robbin', 57);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(526689, 'Carlos', 'Snares', 63);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(843795, 'Enric', 'Dosio', 57);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(328717, 'Jhon', 'Snares', 63);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(444527, 'Joseph', 'Dosni', 47);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(659831, 'Zanifer', 'Emily', 47);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(847674, 'Kuleswar', 'Sitaraman', 57);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(748681, 'Henrey', 'Gabriel', 47);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(555935, 'Alex', 'Manuel', 57);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(539569, 'George', 'Mardy', 27);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(733843, 'Mario', 'Saule', 63);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(631548, 'Alan', 'Snappy', 27);
+
+INSERT INTO EMP_DETAILS
+VALUES
+(839139, 'Maria', 'Foster', 57);
 
 
--- 7. Write a query to display the columns in a specific order like order date, salesman id, order number and purchase amount from for all the orders.
--- SELECT ord_date, salesman_id, ord_no, purch_amt FROM ORDERS;
-
--- 8. Write a query which will retrieve the values of salesman id of all salesmen getting orders from the customers in orders table without any repeats.
--- SELECT DISTINCT salesman_id FROM ORDERS;
-
-
--- 9. Write a SQL statement to display names and city of salesman, who belongs to the city of Paris.
--- SELECT name, city FROM SALESMAN
--- WHERE city = 'Paris';
-
--- 10. Write a SQL statement to display all the information for those customers with a grade of 200.
--- SELECT * FROM CUSTOMER
--- WHERE grade = 200;
-
--- 11. Write a SQL query to display the order number followed by order date and the purchase amount for each order which will be delivered by the salesman who is holding the ID 5001.
--- SELECT ord_date, purch_amt FROM ORDERS
--- WHERE salesman_id = 5001;
-
--- 12. Write a SQL query to display the Nobel prizes for 1970.
--- SELECT * FROM NOBEL_WIN
--- WHERE year = 1970;
-
-
--- 13. Write a SQL query to know the winner of the 1971 prize for Literature.
--- SELECT * FROM NOBEL_WIN
--- WHERE year = 1971 AND category = 'Literature';
-
-
--- 14. Write a SQL query to display the year and subject that won 'Dennis Gabor' his prize.
--- SELECT year, subject FROM NOBEL_WIN
--- WHERE winner = 'Dennis Gabor';
-
--- 15. Write a SQL query to give the name of the 'Physics' winners since the year 1950.  
--- SELECT winner FROM NOBEL_WIN
--- WHERE subject = 'Physics' AND year >= 1950;
 
 
 
