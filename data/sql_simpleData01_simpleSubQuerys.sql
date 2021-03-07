@@ -102,20 +102,45 @@ WHERE sal.salesman_id = cust.salesman_id GROUP BY name HAVING numero_clientes > 
 
 -- QUERY nome salesman e seu número de customers
 SELECT name, COUNT(sal.salesman_id) AS 'Número clientes' FROM SALESMAN AS sal, CUSTOMER as cust
-WHERE sal.salesman_id = cust.salesman_id GROUP BY name;
+WHERE sal.salesman_id = cust.salesman_id GROUP BY sal.salesman_id; -- or GROUP BY name
+
+SELECT salesman_id, name FROM SALESMAN AS sal
+WHERE 1 <
+(SELECT COUNT(*) FROM CUSTOMER WHERE salesman_id = sal.salesman_id);
+
+
 
 
 -- 12. Write a query to find all orders with order amounts which are above-average amounts for their customers. 
 
+SELECT ord_no, purch_amt, cust.cust_name FROM ORDERS AS ord, CUSTOMER AS cust WHERE
+purch_amt >
+(SELECT AVG(purch_amt) FROM ORDERS 
+WHERE customer_id = cust.customer_id) AND
+cust.customer_id = ord.customer_id;
+
+SELECT * FROM ORDERS AS ord1 WHERE 
+purch_amt >
+(SELECT AVG(purch_amt) FROM ORDERS AS ord2 WHERE ord2.customer_id = ord1.customer_id);
+
+SELECT customer_id, AVG(purch_amt) FROM ORDERS GROUP BY customer_id;
+
+-- 13. Write a queries to find all orders with order amounts which are on or above-average amounts for their customers.
+
+SELECT * FROM ORDERS AS ord1
+WHERE purch_amt >=
+(SELECT AVG(purch_amt) FROM ORDERS AS ord2 WHERE ord2.customer_id = ord1.customer_id); 
 
 
+-- 14. Write a query to find the sums of the amounts from the orders table, grouped by date, eliminating all those dates where the sum was not at least 1000.00 above the maximum order amount for that date.
+
+SELECT ord_date, SUM(purch_amt) soma_date FROM ORDERS AS ord1 GROUP BY ord_date
+HAVING soma_date > (
+(SELECT MAX(purch_amt) FROM ORDERS AS ord2 WHERE ord2.ord_date = ord1.ord_date)
++ 1000);
 
 
-
-
-
-
-
+SELECT ord_date, SUM(purch_amt) soma_date FROM ORDERS GROUP BY ord_date;
 
 
 -- REFERENCE

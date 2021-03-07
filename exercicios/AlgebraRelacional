@@ -1,0 +1,78 @@
+
+- Exercicios Algebra relacional
+
+
+
+(Char alguns operadores: σ, П, X, ⋈)
+
+
+I) Considere o modelo relacional abaixo e responda em álgebra relacional.  
+PECA (codigo, nome, cor, cidade)  
+FORNECEDOR (codigo, nome, cidade)  
+FORNECIMENTO (cod_forn, cod_peca, qtde)  
+
+1)Obter o nome e a cor das peças localizadas em SP.  
+2)Obter o código dos fornecedores que fizeram fornecimento de peça P2 com qtde maior que 200. 
+3)Obter o código e o nome das peças que são vermelhas ou que tem fornecimento feito pelo fornecedor de codigo S1.  
+4)Obter o código dos fornecedores que não fornecem a peça de código P3. 
+5)Obter o nome das peças fornecidas pelo fornecedor Silva.
+6)Recuperar o nome das peças que tiveram fornecimento. 
+
+
+
+
+II) Considere o modelo relacional abaixo e responda em álgebra relacional.  
+ANIMAL (codigo, especie, raça)  
+VACINA (tipo, nome preço, fornecedor)  
+VACINACAO (tipo, codigo) 
+
+
+1)Obter a raça dos animais vacinados com vacinas fornecidas pelo Laboratório AA. 
+OBS: o operador * pode ser usado para representar a junção quando o atributo de junção nas duas tabelas tem o mesmo nome.
+2)Obter a especie e a raça dos animais que não foram vacinados.  
+3)Obter o nome das vacinas tomadas pelos animais Pitbull de sexo fêmea. 
+4)Obter o código dos animais que são da espécie "gato" ou que receberam vacina do tipo "2".
+5)Obter o tipo das vacinas que o animal de código "20" não tomou.  
+
+
+RESPOSTAS
+
+I)
+
+1) П(nome, cor)( σ(cidade="SP")(PECA) )
+2) П(cod_forn)( σ(cod_peca="P2" ^ qtde > 200)(FORNECIMENTO)
+3) 
+FORMA1 - П(codigo, nome)(σ(cor="vermelha" v cod_forn="S1")(PECA ⋈(codigo = cod_peca) FORNECIMENTO))
+FORMA2 - 
+R1 <- σ(cor = "vermelha")(PECA)
+R2 <- σ(cod_forn="S1" ^ codigo=coid_peca)(PECA X FORNECIMENTO)
+RESTPOSTA <- П(codigo, nome)(R1 U R2)
+
+4) П(cod_forn)(σ(cod_peca != "P3")(FORNECIMENTO))
+FORMA2 - П(cod_forn(FORNECIMENTO)) - П(cod_forn(σ(cod_peca="P3"(FORNECIMENTO))))
+
+5) П(PECA.nome PECA ⋈(codigo=cod_peca) (FORNECEDOR ⋈(codigo=cod_forn ^ nome="Silva") FORNECIMENTO))
+
+6) П(nome PECA ⋈ (codigo=cod_peca) FORNECIMENTO
+
+
+
+
+II) 
+
+
+1) П(raça ANIMAL ⋈(ANIMAL.codigo = VACINACAO.codigo) (VACINA ⋈(VACINA.tipo = VACINICAO.tipo ^ fornecedor="AA") VACINACAO))
+
+
+2) 
+R1 <- П( especie, raça ANIMAL)
+R2 <- П( especie, raça ANIMAL ⋈(ANIMAL.codigo = VACINACAO.codigo) VACINACAO)
+RESPOSTA <- R1 - R2
+
+
+
+
+Fonte: http://files.vivacquabd.webnode.com.br/200000172-2dc6c2ec0a/Gabarito%20para%20a%20lista%20de%20exerc%C3%ADcios%20de%20%C3%81lgebra%20Relacional.pdf
+Acesso: 27/02/2021
+
+

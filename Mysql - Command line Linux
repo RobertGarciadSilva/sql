@@ -1,0 +1,49 @@
+
+Mysql - Command line Linux (MySQL Community Server)
+
+Mysql status
+-> sudo service mysql status
+
+
+-> USE database_name;
+-> SHOW TABLES;
+-> SHOW FULL TABLES;
+-> SHOW DATABASES;
+-> DROP DATABASE database_name;
+
+
+
+
+erros:
+
+---------------------------------------------------------------------------
+*1* - Access denied for user 'root'@'localhost' (using password:NO)
+
+
+1 - Instale o MySQL e inicie o serviço com o comando abaixo:
+
+sudo systemctl start mysql
+
+2 - Configure o MySQL inicialmente com o comando abaixo:
+
+sudo mysql_secure_installation
+
+3 - Logue no MySQL com o comando abaixo:
+
+sudo mysql -u root -p
+
+4 - Agora, digite o comando abaixo substituindo a palavra password pela senha que desejar:
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; flush privileges;
+
+Pronto, você já deve estar acessando o MySQL sem problemas.
+
+
+-------------------------------------------------------------------------
+
+
+
+Fontes:
+[1]https://www.mysqltutorial.org
+[2]https://www.kdnuggets.com/2019/05/7-steps-mastering-sql-data-science-2019-edition.html
+[3]https://pt.stackoverflow.com/questions/70151/erro-access-denied-for-user-rootlocalhost-using-passwordno-ao-aceder-a
