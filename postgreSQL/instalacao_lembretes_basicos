@@ -1,0 +1,43 @@
+
+
+Lembretes básicos postegreSQL
+
+- Instalação
+
+sudo apt-get update
+sudo apet-get install postgresql postgresql-contrib
+
+
+
+
+- Comandos úteis
+
+
+sudo -u postgres createuser --interactive : Criar usuário
+sudo -u postgres psql : Logar user postgres
+\l : Listar base de dados
+\q : quit
+\conninfo : Informações sobre a conexão
+psql -U <user_name> <db_name>, exemplo: psql -U usuario1 db_1 : Conectando-se ao banco
+psql -U user1 postgres : Conectando-se ao db postgres
+sudo -u postgres psql : Entrando como super usuário postgres 
+
+
+
+
+
+
+
+
+--- Referências
+
+[1]https://www.youtube.com/watch?v=VNy2nhho9Pg # Instalação
+[2]https://www.youtube.com/watch?v=qw--VYLpxG4 # Curso freeCodeCamp
+[3]https://stackoverflow.com/questions/48502458/postgresql-just-added-a-new-user-but-now-says-unknown-user
+
+# firstconnect
+[4]https://docs.boundlessgeo.com/suite/1.1.1/dataadmin/pgGettingStarted/firstconnect.html
+[5]https://serverfault.com/questions/110154/whats-the-default-superuser-username-password-for-postgres-after-a-new-install
+
+
+

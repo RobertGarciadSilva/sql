@@ -1,0 +1,26 @@
+
+Lembretes SQL, postegreSQL
+
+CREATE DATABASE <db_name>;
+DROP TABLE <tb_name>;
+psql --help : postegreSQL
+\l : List databases 
+\d : Describe relations, sequences ... 
+\d <name_table> : Describe especific <name_table> table.
+CTRL + L : Limpar tela.
+\dt : Describe only relations (tables)
+\du : List users
+sudo -u user_name psql db_name : To login without a password, veja [6]
+ALTER USER user_name WITH PASSWORD 'new_password'; : To reset the password if you have forgotten, veja [6]
+
+
+
+
+
+REFERENCES
+[1]https://www.youtube.com/watch?v=qw--VYLpxG4
+[2]https://www.postgresql.org/docs/
+
+# Change user password
+[3]https://stackoverflow.com/questions/12720967/postgresql-how-to-change-postgresql-user-password
+
