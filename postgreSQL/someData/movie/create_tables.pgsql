@@ -1,4 +1,8 @@
 
+-- Crie um database chamado movie e execute a criação 
+-- das tableas abaixo depois execute a inserção dos valores.
+-- 0BS: O database tem de ser criado do zero, caso não, pode ocorrer
+-- problema ao ao inserir os valores, devido a sequencia da PRIMARY KEY AUTO INCREMENT. 
 
 CREATE TABLE movie (
     mov_id BIGSERIAL NOT NULL PRIMARY KEY,
@@ -65,3 +69,4 @@ CREATE TABLE movie_genres (
 -- REFERENCES
 -- [1]https://www.w3resource.com/sql-exercises/
 -- [2]https://www.postgresql.org/docs/9.2/ddl-constraints.html
+
