@@ -56,3 +56,9 @@ FROM person
 WHERE salary IS NOT NULL
 ORDER BY salary DESC
 OFFSET 2 LIMIT 1;
+
+-- Testing
+WITH new_a AS (SELECT mov_title, (NOW()::DATE - mov_dt_rel)/365 AS age FROM movie) SELECT mov_title, age, ((age*365)+(age/4))/365 AS age_correcaoBissexto FROM new_a;
+
+SELECT mov_title, mov_dt_rel, EXTRACT(YEAR FROM AGE(NOW(), mov_dt_rel)) AS age FROM movie;
+

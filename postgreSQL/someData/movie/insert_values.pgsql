@@ -597,62 +597,63 @@ VALUES (6, 12);
 INSERT INTO movie_genres (mov_id, gen_id)
 VALUES (4, 13);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (22, 1);
+-- Essa parte está repetindo a inserção de valores
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (22, 1);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (17, 2);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (17, 2);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (3, 2);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (3, 2);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (12, 3);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (12, 3);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (11, 5);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (11, 5);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (8, 6);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (8, 6);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (13, 6);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (13, 6);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (26, 7);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (26, 7);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (28, 7);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (28, 7);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (18, 7);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (18, 7);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (21, 7);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (21, 7);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (2, 8);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (2, 8);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (23, 9);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (23, 9);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (7, 10);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (7, 10);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (27, 10);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (27, 10);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (1, 10);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (1, 10);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (14, 11);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (14, 11);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (6, 12);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (6, 12);
 
-INSERT INTO movie_genres (mov_id, gen_id)
-VALUES (4, 13);
+--INSERT INTO movie_genres (mov_id, gen_id)
+--VALUES (4, 13);
 
 
 

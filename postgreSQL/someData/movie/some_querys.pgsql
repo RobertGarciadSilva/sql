@@ -228,3 +228,152 @@ WHERE rev_id IN (
     WHERE rev_stars IS NULL
 );
 
+-- Write a query in SQL to return the reviewer name, movie title, and stars for those movies which reviewed by a reviewer and must be rated. Sort the result by reviewer name, movie title, and number of stars.
+
+
+SELECT rev_name, mov_title, rev_stars
+FROM movie, rating, reviewer
+WHERE movie.mov_id = rating.mov_id 
+AND rating.rev_id = reviewer.rev_id
+AND reviewer.rev_name IS NOT NULL
+AND rating.rev_stars IS NOT NULL
+ORDER BY rev_name, mov_title, rev_stars;
+
+-- using joins
+SELECT rev_name, mov_title, rev_stars
+FROM movie NATURAL JOIN rating NATURAL JOIN reviewer
+WHERE reviewer.rev_name IS NOT NULL
+AND rating.rev_stars IS NOT NULL
+ORDER BY rev_name, mov_title, rev_stars;
+
+SELECT rev_name, mov_title, rev_stars
+FROM movie JOIN rating USING (mov_id) NATURAL JOIN reviewer
+WHERE reviewer.rev_name IS NOT NULL
+AND rating.rev_stars IS NOT NULL
+ORDER BY rev_name, mov_title, rev_stars;
+
+SELECT rev_name, mov_title, rev_stars
+FROM movie JOIN rating ON (movie.mov_id=rating.mov_id) NATURAL JOIN reviewer
+WHERE reviewer.rev_name IS NOT NULL
+AND rating.rev_stars IS NOT NULL
+ORDER BY rev_name, mov_title, rev_stars;
+
+-- Write a query in SQL to find the reviewer's name and the title of the movie for those reviewers who rated more than one movies.
+
+
+
+SELECT rev_name, mov_title
+FROM movie NATURAL JOIN rating NATURAL JOIN reviewer 
+WHERE rating.rev_id IN (
+    SELECT rev_id
+    FROM rating
+    GROUP BY rev_id
+    HAVING COUNT(*) > 1
+);
+
+-- Write a query in SQL to find the movie title, and the highest number of stars that movie received and arranged the result according to the group of a movie and the movie title appear alphabetically in ascending order. 
+
+SELECT mov_title, MAX(rev_stars) AS highest_star FROM movie NATURAL JOIN rating WHERE rev_stars IS NOT NULL GROUP BY mov_title ORDER BY mov_title;
+
+
+-- Write a query in SQL to find the names of all reviewers who rated the movie American Beauty. 
+
+SELECT DISTINCT rev_name 
+FROM reviewer
+WHERE rev_id IN (
+    SELECT reviewer.rev_id
+    FROM reviewer, movie, rating
+    WHERE movie.mov_id = rating.mov_id
+    AND rating.rev_id = reviewer.rev_id
+    AND movie.mov_title = 'American Beauty'
+);
+
+SELECT DISTINCT rev_name
+FROM reviewer NATURAL JOIN movie NATURAL JOIN rating
+WHERE mov_title = 'American Beauty';
+
+
+-- Write a query in SQL to find the titles of all movies which have been reviewed by anybody except by Paul Monks. 
+
+(SELECT DISTINCT mov_title
+FROM movie NATURAL JOIN rating)
+EXCEPT
+(SELECT mov_title
+FROM movie NATURAL JOIN rating NATURAL JOIN reviewer
+WHERE rev_name LIKE '%Paul Monks%')
+ORDER BY mov_title;
+
+SELECT DISTINCT mov_title
+FROM movie NATURAL JOIN rating NATURAL JOIN reviewer
+WHERE rev_name NOT LIKE '%Paul Monks%' OR  rev_name IS NULL /* WHERE rev_name NOT LINK "NULL" = UNKNOWN, If the where clause predicate evaluates to either false or unknown for a tuple, that tuple is not added to the result.*/
+ORDER BY mov_title;
+
+
+SELECT DISTINCT mov_title
+FROM movie NATURAL JOIN rating NATURAL JOIN reviewer
+WHERE rev_id NOT IN (
+    SELECT rev_id 
+    FROM reviewer 
+    WHERE rev_name LIKE '%Paul Monks%'
+) ORDER BY mov_title;
+
+
+-- Write a query in SQL to return the reviewer name, movie title, and number of stars for those movies which rating is the lowest one.
+
+SELECT rev_name, mov_title, rev_stars
+FROM movie NATURAL JOIN rating NATURAL JOIN reviewer
+WHERE rev_stars = (
+    SELECT MIN(rev_stars)
+    FROM rating
+);
+
+-- Write a query in SQL to find the titles of all movies directed by James Cameron. 
+
+SELECT mov_title
+FROM movie NATURAL JOIN movie_direction NATURAL JOIN director
+WHERE dir_fname LIKE '%James%' AND dir_lname LIKE '%Cameron%';
+
+
+-- Write a query in SQL to find the name of those movies where one or more actors acted in two or more movies.
+
+SELECT mov_title
+FROM movie NATURAL JOIN movie_cast 
+WHERE act_id IN (
+    SELECT act_id 
+    FROM movie_cast NATURAL JOIN actor
+    GROUP BY act_id
+    HAVING COUNT(act_id) >= 2
+);
+
+SELECT mov_title 
+FROM movie 
+WHERE mov_id IN (
+SELECT mov_id 
+FROM movie_cast 
+WHERE act_id IN (
+SELECT act_id 
+FROM actor 
+WHERE act_id IN (
+SELECT act_id 
+FROM movie_cast GROUP BY act_id 
+HAVING COUNT(act_id)>1)));
+
+
+-- diversas querys
+
+-- verifica quais movies não possuem rating
+--SELECT mov_title FROM movie LEFT JOIN rating ON movie.mov_id=rating.mov_id WHERE rev_id IS NULL;
+
+-- verifica se o movie 'Seven Samurai' possui rating
+--SELECT COUNT(*) FROM rating WHERE mov_id = (SELECT mov_id FROM movie WHERE mov_title = 'Seven Samurai');
+
+-- WITH mov_stars AS (SELECT mov_title, rev_stars FROM movie NATURAL JOIN rating) SELECT mov_title FROM mov_stars ORDER BY mov_title;
+
+
+
+
+-- REFERENCES
+-- [1]https://www.w3resource.com/sql-exercises/
+-- [2]https://www.postgresql.org/docs/9.2/ddl-constraints.html
+-- [3]https://www.w3resource.com/sql-exercises/movie-database-exercise/subqueries-exercises-on-movie-database.php
+-- [4]db-book.com
