@@ -359,6 +359,124 @@ FROM movie_cast GROUP BY act_id
 HAVING COUNT(act_id)>1)));
 
 
+
+/*Write a query in SQL to find the name of all reviewers who have rated their ratings with a NULL value.*/
+
+SELECT rev_name
+FROM reviewer NATURAL JOIN rating 
+WHERE num_o_ratings IS NULL;
+
+SELECT rev_name
+FROM reviewer JOIN rating USING(rev_id)
+WHERE num_o_ratings IS NULL;
+
+SELECT rev_name
+FROM reviewer JOIN rating ON reviewer.rev_id = rating.rev_id
+WHERE num_o_ratings IS NULL;
+
+
+/*Write a query in SQL to list the first and last names of all the actors who were cast in the movie 'Annie Hall', and the roles they played in that production.*/
+
+SELECT act_fname, act_lname, role
+FROM actor, movie_cast
+WHERE movie_cast.act_id = actor.act_id 
+AND actor.act_id IN (
+    SELECT act_id 
+    FROM movie_cast
+    WHERE mov_id = (SELECT mov_id FROM movie WHERE mov_title = 'Annie Hall')    
+);
+
+SELECT act_fname, act_lname, role
+FROM actor, movie_cast, movie
+WHERE actor.act_id = movie_cast.act_id AND movie_cast.mov_id = movie.mov_id
+AND mov_title = 'Anne Hall';
+
+SELECT act_fname, act_lname, role
+FROM actor NATURAL JOIN movie_cast JOIN movie USING (mov_id)
+WHERE mov_title = 'Annie Hall';
+
+
+/*Write a query in SQL to find the name of movie and director (first and last names) who directed a movie that casted a role for 'Eyes Wide Shut'.*/
+
+SELECT mov_title, CONCAT(dir_fname, ' ', dir_lname) AS dir_name
+FROM movie NATURAL JOIN movie_direction NATURAL JOIN director NATURAL JOIN movie_cast
+WHERE role IS NOT NULL AND 
+mov_title = 'Eyes Wide Shut';
+
+
+/*Write a query in SQL to find the name of movie and director (first and last names) who directed a movie that casted a role as Sean Maguire.*/
+SELECT mov_title, CONCAT(dir_fname, ' ', dir_lname) AS dir_name
+FROM movie NATURAL JOIN movie_direction NATURAL JOIN director NATURAL JOIN movie_cast
+WHERE role = 'Sean Maguire';
+
+
+/*Write a query in SQL to list all the actors who have not acted in any movie between 1990 and 2000.*/
+
+SELECT CONCAT(act_fname, ' ', act_lname) AS act_name
+FROM actor JOIN movie_cast USING(act_id) JOIN movie USING(mov_id)
+WHERE mov_year < 1990 OR mov_year > 2000;
+
+SELECT CONCAT(act_fname, ' ', act_lname) AS act_name
+FROM actor JOIN movie_cast USING(act_id) JOIN movie USING(mov_id)
+WHERE mov_year NOT BETWEEN 1990 AND 2000;
+
+
+/*Write a query in SQL to list first and last name of all the directors with number of genres movies the directed with genres name, and arranged the result alphabetically with the first and last name of the director. */
+
+
+
+SELECT dir_fname, dir_lname, gen_title, COUNT(gen_title) AS count_gen
+FROM director NATURAL JOIN movie_direction NATURAL JOIN movie NATURAL JOIN movie_genres NATURAL JOIN genres
+GROUP BY dir_fname, dir_lname, gen_title
+ORDER BY dir_fname, dir_lname;
+
+
+/*Write a query in SQL to list all the movies with year and genres.*/
+
+SELECT mov_title, mov_year, gen_title
+FROM movie LEFT JOIN movie_genres USING (mov_id) LEFT JOIN genres USING (gen_id)
+ORDER BY mov_title;
+
+
+/*Write a query in SQL to list all the movies with year, genres, and name of the director.*/
+
+SELECT mov_title, mov_year, gen_title, dir_fname, dir_lname
+FROM movie NATURAL LEFT JOIN movie_genres 
+NATURAL LEFT JOIN genres
+NATURAL LEFT JOIN movie_direction
+NATURAL LEFT JOIN director; 
+
+
+/*Write a query in SQL to list all the movies with title, year, date of release, movie duration, and first and last name of the director which released before 1st january 1989, and sort the result set according to release date from highest date to lowest. */
+
+SELECT mov_title, mov_year, mov_dt_rel, mov_time, dir_fname, dir_lname
+FROM movie NATURAL LEFT JOIN movie_direction
+NATURAL LEFT JOIN director
+WHERE mov_dt_rel < '1989-01-01'
+ORDER BY mov_dt_rel DESC;
+
+
+/*Write a query in SQL to compute a report which contain the genres of those movies with their average time and number of movies for each genres.*/
+
+SELECT gen_title, AVG(mov_time)::numeric(6,2), COUNT(*)
+FROM movie NATURAL LEFT JOIN movie_genres
+NATURAL LEFT JOIN genres
+GROUP BY gen_title; 
+
+
+/*Write a query in SQL to find those lowest duration movies along with the year, director's name, actor's name and his/her role in that production.*/
+
+SELECT mov_title, mov_time, mov_year, dir_fname, dir_lname, act_fname, act_lname, role
+FROM movie NATURAL LEFT JOIN movie_direction
+NATURAL LEFT JOIN director
+NATURAL LEFT JOIN movie_cast
+NATURAL LEFT JOIN actor
+WHERE mov_time = (
+    SELECT MIN(mov_time)
+    FROM movie
+);
+
+
 -- diversas querys
 
 -- verifica quais movies não possuem rating
